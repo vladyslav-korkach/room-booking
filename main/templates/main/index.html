@@ -1,0 +1,98 @@
+{% extends "main/base.html" %}
+
+{% block title %} HotelFlow {% endblock %}
+
+{% block content %}
+
+<div class="container py-4 py-lg-5">
+  <div class="row align-items-center gy-4">
+    <div class="col-12 col-lg-7 hero-copy">
+      <span class="badge bg-info text-dark mb-3">
+        Бронювання номерів для всієї мережі
+      </span>
+
+      <h1 class="display-5 fw-bold mb-3">
+        Сучасний сайт для бронювання номерів
+      </h1>
+
+      <p class="text-secondary">
+        Стильний інтерфейс для гостей: пошук готелю, вибір номеру, дати заїзду
+        та швидке бронювання.
+      </p>
+
+      <div class="mt-4 d-flex flex-column flex-sm-row gap-2">
+        <button class="btn btn-info">Забронювати</button>
+        <button class="btn btn-outline-light">Переглянути готелі</button>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-5">
+      <div class="card bg-black border-secondary search-card">
+        <div class="card-body">
+          <h5 class="card-title">Пошук номеру</h5>
+
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Місто</label>
+              <input type="text" class="form-control" />
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
+                <label class="form-label">Заїзд</label>
+                <input type="date" class="form-control" />
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <label class="form-label">Виїзд</label>
+                <input type="date" class="form-control" />
+              </div>
+            </div>
+
+            <button class="btn btn-info w-100 mt-4">Знайти номер</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="catalog" class="container py-4 py-lg-5">
+  <h2 class="mb-4 section-title">Популярні готелі</h2>
+
+  <div class="row g-4">
+    {% for hotel in hotels %}
+    <div class="col-12 col-sm-6 col-xl-4">
+      <div class="card bg-black border-secondary h-100 hotel-card">
+        {% if hotel.main_image %}
+        <img
+          src="{{ hotel.main_image.image }}"
+          class="card-img-top hotel-card-img"
+          alt="{{ hotel.main_image.alt_text|default:hotel.name }}"
+        />
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title">{{ hotel.name }}</h5>
+
+          <p class="text-secondary mb-2">{{ hotel.city }}</p>
+
+          <p class="text-warning mb-2">{{ hotel.stars }}★</p>
+
+          <div class="d-flex justify-content-between align-items-center gap-3 hotel-meta">
+            <span class="fw-bold">
+              від ${{ hotel.min_price|floatformat:0 }} / ніч
+            </span>
+
+            <span class="badge bg-warning text-dark">
+              {{ hotel.avg_rating|floatformat:1 }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

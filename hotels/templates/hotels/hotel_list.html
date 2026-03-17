@@ -1,0 +1,220 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block title %} HotelFlow {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'hotels/css/hotel.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4 py-lg-5">
+  <div class="row align-items-center gy-4">
+    <div class="col-12 col-lg-7 hero-copy">
+      <span class="badge bg-info text-dark mb-3">
+        Бронювання номерів для всієї мережі
+      </span>
+
+      <h1 class="display-5 fw-bold mb-3">
+        Сучасний сайт для бронювання номерів
+      </h1>
+
+      <p class="text-secondary">
+        Стильний інтерфейс для гостей: пошук готелю, вибір номеру, дати заїзду
+        та швидке бронювання.
+      </p>
+
+      <div class="mt-4 d-flex flex-column flex-sm-row gap-2">
+        <button class="btn btn-info">Забронювати</button>
+        <button class="btn btn-outline-light">Переглянути готелі</button>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-5">
+      <div class="card bg-black border-secondary search-card">
+        <div class="card-body">
+          <h5 class="card-title">Пошук номеру</h5>
+
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Місто</label>
+              <input type="text" class="form-control" />
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
+                <label class="form-label">Заїзд</label>
+                <input type="date" class="form-control" />
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <label class="form-label">Виїзд</label>
+                <input type="date" class="form-control" />
+              </div>
+            </div>
+
+            <button class="btn btn-info w-100 mt-4">Знайти номер</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="catalog" class="container py-4 py-lg-5">
+  <h2 class="mb-4 section-title">Популярні готелі</h2>
+
+  <div class="row g-4">
+    {% for hotel in hotels %}
+    <div class="col-12 col-sm-6 col-xl-4">
+      <div class="card bg-black border-secondary h-100 hotel-card">
+        {% if hotel.main_image %}
+        <img
+          src="{{ hotel.main_image.image }}"
+          class="card-img-top hotel-card-img"
+          alt="{{ hotel.main_image.alt_text|default:hotel.name }}"
+        />
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title">{{ hotel.name }}</h5>
+
+          <p class="text-secondary mb-2">{{ hotel.city }}</p>
+
+          <p class="text-warning mb-2">{{ hotel.stars }}★</p>
+
+          <div class="d-flex justify-content-between align-items-center gap-3 hotel-meta">
+            <span class="fw-bold">
+              від ${{ hotel.min_price|floatformat:0 }} / ніч
+            </span>
+
+            <span class="badge bg-warning text-dark">
+              {{ hotel.avg_rating|floatformat:1 }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% if is_paginated %}
+<nav class="mt-5 pagination-wrap">
+  <ul class="pagination pagination-dark justify-content-center">
+    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+      {% if page_obj.has_previous %}
+        <a class="page-link pagination-control" href="?page=1" aria-label="Перша сторінка">
+          <span aria-hidden="true">«</span>
+          <span class="pagination-label">Перша</span>
+        </a>
+      {% else %}
+        <span class="page-link pagination-control" aria-disabled="true">
+          <span aria-hidden="true">«</span>
+          <span class="pagination-label">Перша</span>
+        </span>
+      {% endif %}
+    </li>
+
+    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+      {% if page_obj.has_previous %}
+        <a class="page-link pagination-control" href="?page={{ page_obj.previous_page_number }}" aria-label="Попередня сторінка">
+          <span aria-hidden="true">‹</span>
+          <span class="pagination-label">Назад</span>
+        </a>
+      {% else %}
+        <span class="page-link pagination-control" aria-disabled="true">
+          <span aria-hidden="true">‹</span>
+          <span class="pagination-label">Назад</span>
+        </span>
+      {% endif %}
+    </li>
+
+    {% if page_obj.paginator.num_pages > 4 and page_obj.number > 3 %}
+      <li class="page-item pagination-ellipsis" aria-hidden="true">
+        <span class="page-link">…</span>
+      </li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.paginator.num_pages <= 3 %}
+        {% if num == page_obj.number %}
+          <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+        {% endif %}
+      {% elif page_obj.number <= 2 and num <= 3 %}
+        {% if num == page_obj.number %}
+          <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+        {% endif %}
+      {% elif page_obj.number >= page_obj.paginator.num_pages|add:'-1' and num >= page_obj.paginator.num_pages|add:'-2' %}
+        {% if num == page_obj.number %}
+          <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+        {% endif %}
+      {% elif num >= page_obj.number|add:'-1' and num <= page_obj.number|add:'1' %}
+        <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+          {% if num == page_obj.number %}
+            <span class="page-link">{{ num }}</span>
+          {% else %}
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.paginator.num_pages > 4 and page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+      <li class="page-item pagination-ellipsis" aria-hidden="true">
+        <span class="page-link">…</span>
+      </li>
+    {% endif %}
+
+    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+      {% if page_obj.has_next %}
+        <a class="page-link pagination-control" href="?page={{ page_obj.next_page_number }}" aria-label="Наступна сторінка">
+          <span class="pagination-label">Далі</span>
+          <span aria-hidden="true">›</span>
+        </a>
+      {% else %}
+        <span class="page-link pagination-control" aria-disabled="true">
+          <span class="pagination-label">Далі</span>
+          <span aria-hidden="true">›</span>
+        </span>
+      {% endif %}
+    </li>
+
+    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+      {% if page_obj.has_next %}
+        <a class="page-link pagination-control" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Остання сторінка">
+          <span class="pagination-label">Остання</span>
+          <span aria-hidden="true">»</span>
+        </a>
+      {% else %}
+        <span class="page-link pagination-control" aria-disabled="true">
+          <span class="pagination-label">Остання</span>
+          <span aria-hidden="true">»</span>
+        </span>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}

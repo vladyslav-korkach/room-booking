@@ -1,0 +1,120 @@
+.pagination-dark .page-item {
+    background: rgba(17, 24, 39, 0.9) !important;
+    border: 1px solid rgba(71, 85, 105, 0.75) !important;
+    color: #cbd5e1 !important;
+    margin: 0 4px;
+    border-radius: 999px !important;
+    min-width: 44px;
+    text-align: center;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(12px);
+}
+
+.pagination-dark .page-item:hover {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+    border-color: #3b82f6 !important;
+    transform: translateY(-1px);
+}
+
+.pagination-dark .page-item.active .page-link {
+    background: linear-gradient(135deg, #2563eb, #06b6d4) !important;
+    border: 1px solid transparent !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
+}
+
+.pagination-dark .page-item.disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.pagination-dark .page-item.pagination-ellipsis {
+    background: transparent !important;
+    border-color: transparent !important;
+    min-width: auto;
+}
+
+.pagination-dark .page-item.pagination-ellipsis:hover {
+    transform: none;
+    border-color: transparent !important;
+    background: transparent !important;
+}
+
+.pagination-dark {
+    gap: 0.35rem;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: max-content;
+    min-width: 100%;
+}
+
+.pagination-dark .page-link {
+    background-color: transparent !important;
+    border: none !important;
+    color: inherit !important;
+    border-radius: inherit !important;
+    min-width: 44px;
+    padding: 0.7rem 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.pagination-dark .page-link:focus {
+    box-shadow: none !important;
+}
+
+.pagination-control {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.pagination-label {
+    white-space: nowrap;
+}
+
+.pagination-wrap {
+    padding-bottom: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.pagination-wrap::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+    .pagination-label {
+        display: none;
+    }
+
+    .pagination-dark {
+        gap: 0.25rem;
+    }
+
+    .pagination-dark .page-link {
+        padding: 0.6rem 0.72rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .pagination-dark .page-item {
+        min-width: 38px;
+        margin: 0;
+    }
+
+    .pagination-dark .page-item.pagination-ellipsis {
+        display: none;
+    }
+
+    .pagination-dark .page-link {
+        min-width: 38px;
+        padding: 0.55rem 0.68rem;
+        font-size: 0.9rem;
+    }
+}
