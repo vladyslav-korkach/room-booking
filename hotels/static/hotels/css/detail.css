@@ -1,0 +1,88 @@
+.hotel-detail-main-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+}
+
+.hotel-detail-summary {
+    position: sticky;
+    top: 90px;
+}
+
+.hotel-detail-price-box {
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(71, 85, 105, 0.4);
+    border-radius: 1rem;
+    background: rgba(17, 24, 39, 0.6);
+}
+
+.hotel-gallery-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-card {
+    overflow: hidden;
+}
+
+.room-type-card {
+    overflow: hidden;
+}
+
+.room-type-header {
+    min-width: 0;
+}
+
+.room-type-info {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.room-type-info p {
+    overflow-wrap: anywhere;
+}
+
+.room-type-price {
+    flex: 0 0 auto;
+}
+
+.room-type-img {
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+.room-type-img-placeholder {
+    min-height: 240px;
+    background: #111827;
+}
+
+@media (max-width: 991.98px) {
+    .hotel-detail-summary {
+        position: static;
+    }
+
+    .hotel-detail-main-img {
+        height: 320px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hotel-detail-main-img {
+        height: 240px;
+    }
+
+    .hotel-gallery-img {
+        height: 180px;
+    }
+
+    .room-type-img,
+    .room-type-img-placeholder {
+        min-height: 200px;
+    }
+}

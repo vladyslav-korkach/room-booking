@@ -1,8 +1,10 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.text import slugify
 
 class Hotel(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, blank=True)
     city = models.CharField(max_length=120)
     address = models.CharField(max_length=255)
     description = models.TextField(blank=True)
@@ -22,6 +24,19 @@ class Hotel(models.Model):
         if not reviews.exists():
             return None
         return round(sum(review.rating for review in reviews) / reviews.count(), 1)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name)
+            slug = base_slug
+            counter = 1
+
+            while Hotel.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+            
+            self.slug = slug
+        super().save(*args, **kwargs)
+        
 
     def __str__(self):
         return self.name
@@ -30,6 +45,7 @@ class Hotel(models.Model):
 class RoomType(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="room_types")
     name = models.CharField(max_length=120)
+    slug = models.SlugField(blank=True)
     capacity = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     total_quantity = models.PositiveIntegerField(default=1)
@@ -39,9 +55,26 @@ class RoomType(models.Model):
     @property
     def main_image(self):
         return self.images.filter(is_main=True).first()
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name)
+            slug = base_slug
+            counter = 1
+
+            while RoomType.objects.filter(hotel=self.hotel, slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+
+            self.slug = slug
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f"{self.hotel.name} - {self.name}"
+    
+    class Meta:
+        unique_together = ("hotel", "slug")
     
 
 class HotelImage(models.Model):

@@ -31,10 +31,6 @@
     font-size: clamp(1.8rem, 2vw + 1rem, 2.5rem);
 }
 
-.hotel-card {
-    overflow: hidden;
-}
-
 .hotel-meta {
     flex-wrap: wrap;
 }

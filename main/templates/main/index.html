@@ -64,6 +64,9 @@
     {% for hotel in hotels %}
     <div class="col-12 col-sm-6 col-xl-4">
       <div class="card bg-black border-secondary h-100 hotel-card">
+
+        <a href="{% url 'hotel_detail' hotel.slug %}" class="stretched-link"></a>
+        
         {% if hotel.main_image %}
         <img
           src="{{ hotel.main_image.image }}"
