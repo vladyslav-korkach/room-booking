@@ -71,7 +71,7 @@
           </div>
 
           <div class="d-grid gap-2">
-            <a href="#" class="btn btn-info">Забронювати</a>
+            <a href="{% url 'booking_create' room_type.hotel.slug room_type.slug %}" class="btn btn-info">Забронювати</a>
             <a href="#gallery" class="btn btn-outline-light">Переглянути фото</a>
           </div>
         </div>

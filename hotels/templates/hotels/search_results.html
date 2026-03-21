@@ -1,0 +1,193 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Результати пошуку{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'hotels/css/hotel.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="container py-4 py-lg-5">
+  <div class="row g-4 align-items-start">
+    <div class="col-12 col-lg-4">
+      <div class="card bg-black border-secondary search-card">
+        <div class="card-body">
+          <h2 class="h5 mb-3">Пошук номеру</h2>
+          {% include "hotels/partials/search_form.html" %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-8">
+      <div class="card bg-black border-secondary mb-4">
+        <div class="card-body">
+          <h1 class="h4 mb-3">Результати пошуку</h1>
+
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge text-bg-secondary">
+              Місто: {{ request.GET.city|default:"Будь-яке" }}
+            </span>
+            <span class="badge text-bg-secondary">
+              Заїзд: {{ request.GET.check_in|default:"—" }}
+            </span>
+            <span class="badge text-bg-secondary">
+              Виїзд: {{ request.GET.check_out|default:"—" }}
+            </span>
+            <span class="badge text-bg-secondary">
+              Дорослі: {{ request.GET.adults|default:"1" }}
+            </span>
+            <span class="badge text-bg-secondary">
+              Діти: {{ request.GET.children|default:"0" }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {% if hotels %}
+        <div class="row g-4">
+          {% for hotel in hotels %}
+            <div class="col-12 col-sm-6">
+              <div class="card bg-black border-secondary h-100 hotel-card">
+                <a
+                  href="{% url 'hotel_detail' hotel.slug %}?city={{ request.GET.city|urlencode }}&check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}&children={{ request.GET.children|urlencode }}"
+                  class="stretched-link"
+                ></a>
+
+                {% if hotel.main_image %}
+                  <img
+                    src="{{ hotel.main_image.image }}"
+                    class="card-img-top hotel-card-img"
+                    alt="{{ hotel.main_image.alt_text|default:hotel.name }}"
+                  />
+                {% endif %}
+
+                <div class="card-body">
+                  <h3 class="h5 card-title mb-2">{{ hotel.name }}</h3>
+
+                  <p class="text-secondary mb-2">{{ hotel.city }}</p>
+
+                  <p class="text-warning mb-2">{{ hotel.stars }}★</p>
+
+                  <div class="d-flex justify-content-between align-items-center gap-3 hotel-meta">
+                    <span class="fw-bold">
+                      від ${{ hotel.min_price|floatformat:0 }} / ніч
+                    </span>
+
+                    <span class="badge bg-warning text-dark">
+                      {{ hotel.avg_rating|floatformat:1 }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+      {% else %}
+        <div class="card bg-black border-secondary">
+          <div class="card-body">
+            <h2 class="h5 mb-3">Нічого не знайдено</h2>
+            <p class="text-secondary mb-0">
+              За цими параметрами не знайдено готелів. Спробуйте змінити місто, дати або кількість гостей.
+            </p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% if is_paginated %}
+<nav class="mt-4 pagination-wrap">
+  <ul class="pagination pagination-dark justify-content-center">
+    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+      {% if page_obj.has_previous %}
+        <a
+          class="page-link pagination-control"
+          href="?city={{ request.GET.city|urlencode }}&check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}&children={{ request.GET.children|urlencode }}&page=1"
+        >
+          <span aria-hidden="true">«</span>
+          <span class="pagination-label">Перша</span>
+        </a>
+      {% else %}
+        <span class="page-link pagination-control" aria-disabled="true">
+          <span aria-hidden="true">«</span>
+          <span class="pagination-label">Перша</span>
+        </span>
+      {% endif %}
+    </li>
+
+    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+      {% if page_obj.has_previous %}
+        <a
+          class="page-link pagination-control"
+          href="?city={{ request.GET.city|urlencode }}&check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}&children={{ request.GET.children|urlencode }}&page={{ page_obj.previous_page_number }}"
+        >
+          <span aria-hidden="true">‹</span>
+          <span class="pagination-label">Назад</span>
+        </a>
+      {% else %}
+        <span class="page-link pagination-control" aria-disabled="true">
+          <span aria-hidden="true">‹</span>
+          <span class="pagination-label">Назад</span>
+        </span>
+      {% endif %}
+    </li>
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if num == page_obj.number %}
+        <li class="page-item active">
+          <span class="page-link">{{ num }}</span>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?city={{ request.GET.city|urlencode }}&check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}&children={{ request.GET.children|urlencode }}&page={{ num }}"
+          >
+            {{ num }}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+      {% if page_obj.has_next %}
+        <a
+          class="page-link pagination-control"
+          href="?city={{ request.GET.city|urlencode }}&check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}&children={{ request.GET.children|urlencode }}&page={{ page_obj.next_page_number }}"
+        >
+          <span class="pagination-label">Далі</span>
+          <span aria-hidden="true">›</span>
+        </a>
+      {% else %}
+        <span class="page-link pagination-control" aria-disabled="true">
+          <span class="pagination-label">Далі</span>
+          <span aria-hidden="true">›</span>
+        </span>
+      {% endif %}
+    </li>
+
+    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+      {% if page_obj.has_next %}
+        <a
+          class="page-link pagination-control"
+          href="?city={{ request.GET.city|urlencode }}&check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}&children={{ request.GET.children|urlencode }}&page={{ page_obj.paginator.num_pages }}"
+        >
+          <span class="pagination-label">Остання</span>
+          <span aria-hidden="true">»</span>
+        </a>
+      {% else %}
+        <span class="page-link pagination-control" aria-disabled="true">
+          <span class="pagination-label">Остання</span>
+          <span aria-hidden="true">»</span>
+        </span>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}

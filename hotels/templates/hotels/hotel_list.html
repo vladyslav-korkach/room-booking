@@ -36,27 +36,7 @@
       <div class="card bg-black border-secondary search-card">
         <div class="card-body">
           <h5 class="card-title">Пошук номеру</h5>
-
-          <form>
-            <div class="mb-3">
-              <label class="form-label">Місто</label>
-              <input type="text" class="form-control" />
-            </div>
-
-            <div class="row g-3">
-              <div class="col-12 col-sm-6">
-                <label class="form-label">Заїзд</label>
-                <input type="date" class="form-control" />
-              </div>
-
-              <div class="col-12 col-sm-6">
-                <label class="form-label">Виїзд</label>
-                <input type="date" class="form-control" />
-              </div>
-            </div>
-
-            <button class="btn btn-info w-100 mt-4">Знайти номер</button>
-          </form>
+          {% include "hotels/partials/search_form.html" %}
         </div>
       </div>
     </div>

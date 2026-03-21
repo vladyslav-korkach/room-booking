@@ -27,6 +27,23 @@
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
 }
 
+.search-card .card-title {
+    color: #f8fafc;
+}
+
+.search-card .form-label {
+    color: #cbd5e1;
+    font-weight: 500;
+}
+
+.search-card .form-control {
+    color: #111827;
+}
+
+.search-card .form-control::placeholder {
+    color: #6b7280;
+}
+
 .section-title {
     font-size: clamp(1.8rem, 2vw + 1rem, 2.5rem);
 }

@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+
+{% block title %}Бронювання підтверджено{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-7">
+      <div class="card bg-black border-secondary text-center">
+        <div class="card-body p-4 p-lg-5">
+          <p class="text-info text-uppercase small fw-semibold mb-2">
+            Booking
+          </p>
+          <h1 class="h3 mb-3">Бронювання підтверджено</h1>
+          <p class="text-secondary mb-4">
+            Ваш запит успішно збережено. Найближчим часом з вами зв'яжуться для підтвердження деталей.
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'hotels' %}" class="btn btn-info">
+              Переглянути інші готелі
+            </a>
+            <a href="/" class="btn btn-outline-light">
+              На головну
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

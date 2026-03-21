@@ -1,0 +1,90 @@
+<form method="get" action="{% url 'hotel_search' %}">
+  <div class="mb-3">
+    <label class="form-label">Місто</label>
+    <input
+      type="text"
+      name="city"
+      class="form-control"
+      value="{{ request.GET.city }}"
+    />
+    {% if search_form.city.errors %}
+    <div class="text-danger small mt-1">
+      {{ search_form.city.errors|join:", " }}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="row g-3">
+    <div class="col-6">
+      <label class="form-label">Заїзд</label>
+      <input
+        type="date"
+        name="check_in"
+        class="form-control"
+        value="{{ request.GET.check_in }}"
+      />
+      {% if search_form.check_in.errors %}
+      <div class="text-danger small mt-1">
+        {{ search_form.check_in.errors|join:", " }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="col-6">
+      <label class="form-label">Виїзд</label>
+      <input
+        type="date"
+        name="check_out"
+        class="form-control"
+        value="{{ request.GET.check_out }}"
+      />
+      {% if search_form.check_out.errors %}
+      <div class="text-danger small mt-1">
+        {{ search_form.check_out.errors|join:", " }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row g-3 mt-1">
+    <div class="col-6">
+      <label class="form-label">Дорослі</label>
+      <input
+        type="number"
+        name="adults"
+        min="1"
+        value="{{ request.GET.adults|default:'1' }}"
+        class="form-control"
+      />
+      {% if search_form.adults.errors %}
+      <div class="text-danger small mt-1">
+        {{ search_form.adults.errors|join:", " }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="col-6">
+      <label class="form-label">Діти</label>
+      <input
+        type="number"
+        name="children"
+        min="0"
+        value="{{ request.GET.children|default:'0' }}"
+        class="form-control"
+      />
+      {% if search_form.children.errors %}
+      <div class="text-danger small mt-1">
+        {{ search_form.children.errors|join:", " }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if search_form.non_field_errors %}
+  <div class="text-danger small mt-3">
+    {{ search_form.non_field_errors|join:", " }}
+  </div>
+  {% endif %}
+
+  <button class="btn btn-info w-100 mt-3">Знайти</button>
+</form>
