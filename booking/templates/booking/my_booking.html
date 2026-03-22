@@ -1,0 +1,46 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}My bookings{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'booking/css/booking.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="container py-5 my-bookings-page">
+  <h1 class="h3 mb-4">My bookings</h1>
+
+  {% if bookings %}
+    <div class="row g-4">
+      {% for booking in bookings %}
+        <div class="col-12">
+          <div class="card bg-black border-secondary my-booking-card">
+            <div class="card-body text-light">
+                <h2 class="h5 mb-2 my-booking-hotel">{{ booking.room_type.hotel.name }}</h2>
+                <p class="my-booking-room mb-3">{{ booking.room_type.name }}</p>
+                <p class="mb-1 my-booking-meta">Check-in: {{ booking.check_in }}</p>
+                <p class="mb-1 my-booking-meta">Check-out: {{ booking.check_out }}</p>
+                <p class="mb-1 my-booking-meta">Guests: {{ booking.guests }}</p>
+                <p class="mb-0 my-booking-status">Status: {{ booking.get_status_display }}</p>
+                {% if booking.status != booking.Status.CANCELED and booking.check_in > today %}
+                <form method="post" action="{% url 'booking_cancel' booking.pk %}" class="mt-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">Скасувати бронювання</button>
+                </form>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card bg-black border-secondary my-booking-card">
+      <div class="card-body text-light">
+        <p class="mb-0 my-booking-empty">You have no bookings yet.</p>
+      </div>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

@@ -64,6 +64,36 @@
     box-shadow: 0 0 0 0.2rem rgba(34, 211, 238, 0.16);
 }
 
+.my-bookings-page .h3 {
+    color: #f8fafc;
+}
+
+.my-booking-card {
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+}
+
+.my-booking-hotel {
+    color: #f8fafc;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.my-booking-room {
+    color: #cbd5e1;
+    font-size: 1.1rem;
+}
+
+.my-booking-meta,
+.my-booking-empty {
+    color: #dbeafe;
+    font-size: 1rem;
+}
+
+.my-booking-status {
+    color: #fbbf24;
+    font-weight: 600;
+}
+
 @media (max-width: 991.98px) {
     .booking-summary-card {
         position: static;
@@ -74,5 +104,9 @@
     .booking-summary-img,
     .booking-summary-placeholder {
         height: 220px;
+    }
+
+    .my-booking-hotel {
+        font-size: 1.5rem;
     }
 }

@@ -1,0 +1,327 @@
+.home-page {
+    background:
+        radial-gradient(circle at top left, rgba(251, 191, 36, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(14, 165, 233, 0.18), transparent 28%),
+        linear-gradient(180deg, #06131f 0%, #0b1724 50%, #091119 100%);
+}
+
+.home-hero,
+.home-benefits,
+.home-showcase {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-panel,
+.planner-card,
+.benefit-card,
+.mini-stay-card,
+.gallery-card {
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    backdrop-filter: blur(18px);
+}
+
+.hero-panel {
+    padding: 2rem;
+    border-radius: 32px;
+    background:
+        linear-gradient(135deg, rgba(251, 191, 36, 0.14), transparent 40%),
+        rgba(7, 17, 29, 0.82);
+    box-shadow: 0 28px 90px rgba(2, 6, 23, 0.4);
+}
+
+.hero-kicker,
+.section-eyebrow,
+.planner-label,
+.mini-stay-city {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.78rem;
+    color: #fbbf24;
+}
+
+.hero-title,
+.planner-title,
+.section-title,
+.spotlight-title,
+.mini-stay-title,
+.gallery-card-title,
+.benefit-title {
+    color: #f8fafc;
+    line-height: 1.05;
+}
+
+.hero-title {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.hero-text,
+.planner-text,
+.benefit-text,
+.spotlight-copy {
+    max-width: 60ch;
+    color: #cbd5e1;
+    font-size: 1.02rem;
+}
+
+.hero-primary-btn,
+.spotlight-btn {
+    border: none;
+    color: #08111d;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.hero-primary-btn:hover,
+.spotlight-btn:hover {
+    color: #08111d;
+    background: linear-gradient(135deg, #fcd34d, #f59e0b);
+}
+
+.hero-secondary-btn {
+    border-color: rgba(248, 250, 252, 0.38);
+}
+
+.hero-secondary-btn:hover {
+    background: rgba(248, 250, 252, 0.08);
+    border-color: rgba(248, 250, 252, 0.5);
+}
+
+.hero-stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    height: 100%;
+    padding: 1rem 1.1rem;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.hero-stat-value {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.hero-stat-label {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+.planner-card {
+    padding: 2rem;
+    border-radius: 32px;
+    background:
+        linear-gradient(180deg, rgba(14, 165, 233, 0.15), transparent 30%),
+        rgba(5, 15, 26, 0.9);
+    box-shadow: 0 24px 80px rgba(2, 6, 23, 0.36);
+}
+
+.planner-card .form-label {
+    color: #dbeafe;
+    font-weight: 500;
+}
+
+.planner-card .form-control {
+    min-height: 48px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    background: rgba(248, 250, 252, 0.95);
+    color: #0f172a;
+}
+
+.planner-card .form-control:focus {
+    border-color: rgba(251, 191, 36, 0.75);
+    box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.15);
+}
+
+.planner-card .btn-info {
+    border: none;
+    color: #08111d;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+}
+
+.planner-card .btn-info:hover {
+    color: #08111d;
+    background: linear-gradient(135deg, #7dd3fc, #0ea5e9);
+}
+
+.benefit-card {
+    height: 100%;
+    padding: 1.6rem;
+    border-radius: 26px;
+    background: rgba(7, 17, 29, 0.78);
+}
+
+.benefit-index {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #38bdf8;
+}
+
+.spotlight-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 520px;
+    border-radius: 34px;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.95));
+}
+
+.spotlight-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.spotlight-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(2, 6, 23, 0.08) 0%, rgba(2, 6, 23, 0.88) 100%);
+}
+
+.spotlight-content {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.spotlight-topline,
+.spotlight-meta,
+.gallery-card-topline,
+.gallery-card-meta,
+.mini-stay-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    color: #dbeafe;
+    font-size: 0.94rem;
+}
+
+.spotlight-title {
+    max-width: 12ch;
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.6rem);
+}
+
+.stacked-stays {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mini-stay-card {
+    position: relative;
+    overflow: hidden;
+    padding: 1.35rem;
+    border-radius: 24px;
+    background: rgba(7, 17, 29, 0.84);
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.mini-stay-card:hover,
+.gallery-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(251, 191, 36, 0.45);
+    box-shadow: 0 18px 45px rgba(2, 6, 23, 0.28);
+}
+
+.mini-stay-title,
+.gallery-card-title {
+    margin-bottom: 0.65rem;
+    font-size: 1.45rem;
+}
+
+.gallery-card {
+    overflow: hidden;
+    border-radius: 28px;
+    background: rgba(7, 17, 29, 0.84);
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.gallery-card-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.gallery-card-body {
+    padding: 1.4rem;
+}
+
+.gallery-link {
+    display: inline-flex;
+    margin-top: 1rem;
+    color: #fbbf24;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.gallery-link:hover {
+    color: #fcd34d;
+}
+
+@media (max-width: 1199.98px) {
+    .spotlight-card {
+        min-height: 460px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .hero-panel,
+    .planner-card {
+        padding: 1.6rem;
+    }
+
+    .spotlight-title {
+        max-width: none;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .hero-title {
+        max-width: none;
+    }
+
+    .spotlight-card {
+        min-height: 420px;
+    }
+
+    .spotlight-content {
+        padding: 1.4rem;
+    }
+
+    .gallery-card-image {
+        height: 220px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-panel,
+    .planner-card,
+    .benefit-card,
+    .gallery-card-body,
+    .mini-stay-card {
+        padding: 1.2rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .spotlight-card {
+        min-height: 360px;
+        border-radius: 24px;
+    }
+
+    .gallery-card {
+        border-radius: 22px;
+    }
+
+    .gallery-card-image {
+        height: 200px;
+    }
+}

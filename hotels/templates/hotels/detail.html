@@ -165,8 +165,21 @@
                 </div>
 
                 <div class="mt-auto pt-3 d-flex justify-content-end gap-3 flex-wrap">
-                  <a href="{% url 'room_type_detail' hotel.slug room.slug %}?check_in={{ request.GET.check_in }}&check_out={{ request.GET.check_out }}&adults={{ request.GET.adults }}&children={{ request.GET.children }}" class="btn btn-success">Детальніше</a>
-                  <a href="{% url 'booking_create' hotel.slug room.slug %}" class="btn btn-info">Забронювати</a>
+                  <a
+                    href="{% url 'room_type_detail' hotel.slug room.slug %}{% if request.GET.check_in and request.GET.check_out %}?check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}&children={{ request.GET.children|urlencode }}{% endif %}"
+                    class="btn btn-success"
+                  >
+                    Детальніше
+                  </a>
+
+                  <a
+                    href="{% url 'booking_create' hotel.slug room.slug %}{% if request.GET.check_in and request.GET.check_out %}?check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}{% endif %}"
+                    class="btn btn-info"
+                  >
+                    Забронювати
+                  </a>
+
+
                 </div>
               </div>
             </div>

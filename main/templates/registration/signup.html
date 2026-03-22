@@ -1,0 +1,172 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Створити акаунт{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="auth-page">
+  <section class="auth-section py-5 py-lg-6">
+    <div class="container">
+      <div class="row g-4 g-xl-5 align-items-stretch">
+        <div class="col-12 col-lg-6">
+          <div class="auth-hero h-100">
+            <span class="auth-eyebrow">HotelFlow Account</span>
+            <h1 class="auth-title mt-3 mb-3">Увійдіть, щоб керувати своїми бронюваннями без зайвих кроків</h1>
+            <p class="auth-copy mb-4">
+              Зберігайте історію поїздок, переглядайте активні бронювання та
+              швидше оформлюйте нові замовлення в одному кабінеті.
+            </p>
+
+            <div class="auth-feature-grid">
+              <article class="auth-feature-card">
+                <span class="auth-feature-index">01</span>
+                <h2 class="auth-feature-title">Швидкий доступ</h2>
+                <p class="auth-feature-text mb-0">
+                  Переглядайте свої бронювання та статус замовлень в одному місці.
+                </p>
+              </article>
+
+              <article class="auth-feature-card">
+                <span class="auth-feature-index">02</span>
+                <h2 class="auth-feature-title">Менше ручного вводу</h2>
+                <p class="auth-feature-text mb-0">
+                  Для авторизованих користувачів дані бронювання заповнюються швидше.
+                </p>
+              </article>
+            </div>
+
+            <div class="auth-inline-panel mt-4">
+              <p class="auth-inline-label mb-2">Потрібне натхнення?</p>
+              <a class="btn btn-light auth-secondary-btn" href="{% url 'hotels' %}">
+                Переглянути готелі
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="auth-form-wrap h-100">
+            <div class="auth-form-card">
+              <div class="auth-form-header mb-4">
+                <span class="auth-form-kicker">Вхід до кабінету</span>
+                <h2 class="auth-form-title mt-2 mb-2">Увійти</h2>
+                <p class="auth-form-text mb-0">
+                  Використайте свій логін і пароль, щоб перейти до особистого кабінету.
+                </p>
+              </div>
+
+              {% if form.non_field_errors %}
+                <div class="auth-alert mb-4" role="alert">
+                  {% for error in form.non_field_errors %}
+                    <p class="mb-0">{{ error }}</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              <form method="post" novalidate class="auth-form">
+                {% csrf_token %}
+
+                <div class="auth-field">
+                  <label for="{{ form.username.id_for_label }}" class="form-label auth-label">
+                    Ім'я користувача
+                  </label>
+                  {{ form.username }}
+                  {% if form.username.errors %}
+                    <div class="auth-field-error">
+                      {% for error in form.username.errors %}
+                        <p class="mb-0">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="auth-field">
+                  <label for="{{ form.email.id_for_label }}" class="form-label auth-label">
+                    Email
+                  </label>
+                  {{ form.email }}
+                  {% if form.email.errors %}
+                    <div class="auth-field-error">
+                      {% for error in form.email.errors %}
+                        <p class="mb-0">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="auth-field">
+                  <label for="{{ form.first_name.id_for_label }}" class="form-label auth-label">
+                    Імʼя
+                  </label>
+                  {{ form.first_name }}
+                  {% if form.first_name.errors %}
+                    <div class="auth-field-error">
+                      {% for error in form.first_name.errors %}
+                        <p class="mb-0">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="auth-field">
+                  <label for="{{ form.last_name.id_for_label }}" class="form-label auth-label">
+                    Прізвище
+                  </label>
+                  {{ form.last_name }}
+                  {% if form.last_name.errors %}
+                    <div class="auth-field-error">
+                      {% for error in form.last_name.errors %}
+                        <p class="mb-0">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="auth-field">
+                  <label for="{{ form.password1.id_for_label }}" class="form-label auth-label">
+                    Пароль
+                  </label>
+                  {{ form.password1 }}
+                  {% if form.password1.errors %}
+                    <div class="auth-field-error">
+                      {% for error in form.password1.errors %}
+                        <p class="mb-0">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="auth-field">
+                  <label for="{{ form.password2.id_for_label }}" class="form-label auth-label">
+                    Пароль ще раз
+                  </label>
+                  {{ form.password2 }}
+                  {% if form.password2.errors %}
+                    <div class="auth-field-error">
+                      {% for error in form.password2.errors %}
+                        <p class="mb-0">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                {% if next %}
+                  <input type="hidden" name="next" value="{{ next }}">
+                {% endif %}
+
+                <button type="submit" class="btn auth-submit-btn w-100">
+                  Зареєструватися
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
