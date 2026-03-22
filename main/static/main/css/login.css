@@ -157,8 +157,7 @@
 
 .auth-field input {
     width: 100%;
-    min-height: 54px;
-    padding: 0.9rem 1rem;
+    padding: 0.6rem 1rem;
     border: 1px solid rgba(148, 163, 184, 0.24);
     border-radius: 18px;
     background: rgba(248, 250, 252, 0.96);
@@ -180,8 +179,8 @@
 }
 
 .auth-submit-btn {
-    min-height: 54px;
     margin-top: 0.25rem;
+    padding: .6rem 1rem;
     border-radius: 18px;
     font-size: 1rem;
     font-weight: 700;

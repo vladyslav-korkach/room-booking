@@ -1,3 +1,19 @@
+.hotel-detail-page {
+    background:
+        radial-gradient(circle at left top, rgba(251, 191, 36, 0.12), transparent 24%),
+        radial-gradient(circle at 100% 16%, rgba(56, 189, 248, 0.16), transparent 26%),
+        linear-gradient(180deg, #06131f 0%, #0b1724 48%, #091119 100%);
+}
+
+.hotel-detail-hero,
+.hotel-detail-summary,
+.room-type-card,
+.gallery-card,
+.detail-cta-card {
+    border: 1px solid rgba(148, 163, 184, 0.22) !important;
+    backdrop-filter: blur(18px);
+}
+
 .hotel-detail-main-img {
     width: 100%;
     height: 420px;
@@ -8,6 +24,10 @@
 .hotel-detail-summary {
     position: sticky;
     top: 90px;
+    background:
+        linear-gradient(180deg, rgba(14, 165, 233, 0.12), transparent 28%),
+        rgba(5, 15, 26, 0.92);
+    box-shadow: 0 24px 80px rgba(2, 6, 23, 0.36);
 }
 
 .hotel-detail-price-box {
@@ -26,10 +46,20 @@
 
 .gallery-card {
     overflow: hidden;
+    background: rgba(7, 17, 29, 0.84);
 }
 
 .room-type-card {
     overflow: hidden;
+    background: rgba(7, 17, 29, 0.84);
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.room-type-card:hover,
+.gallery-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(251, 191, 36, 0.4) !important;
+    box-shadow: 0 18px 45px rgba(2, 6, 23, 0.28);
 }
 
 .room-type-header {
@@ -62,6 +92,31 @@
     background: #111827;
 }
 
+.detail-cta-card {
+    padding: 2rem;
+    border-radius: 32px;
+    background:
+        linear-gradient(135deg, rgba(56, 189, 248, 0.12), transparent 36%),
+        rgba(7, 17, 29, 0.84);
+}
+
+.detail-cta-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.78rem;
+    color: #fbbf24;
+}
+
+.detail-cta-title {
+    color: #f8fafc;
+    line-height: 1.08;
+}
+
+.detail-cta-copy {
+    color: #cbd5e1;
+    max-width: 62ch;
+}
+
 @media (max-width: 991.98px) {
     .hotel-detail-summary {
         position: static;
@@ -75,6 +130,11 @@
 @media (max-width: 575.98px) {
     .hotel-detail-main-img {
         height: 240px;
+    }
+
+    .detail-cta-card {
+        padding: 1.2rem;
+        border-radius: 24px;
     }
 
     .hotel-gallery-img {

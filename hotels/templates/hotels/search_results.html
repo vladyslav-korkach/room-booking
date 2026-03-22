@@ -4,100 +4,104 @@
 {% block title %}Результати пошуку{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'main/css/home.css' %}">
 <link rel="stylesheet" href="{% static 'hotels/css/hotel.css' %}">
 {% endblock %}
 
 {% block content %}
-
-<section class="container py-4 py-lg-5">
-  <div class="row g-4 align-items-start">
-    <div class="col-12 col-lg-4">
-      <div class="card bg-black border-secondary search-card">
-        <div class="card-body">
-          <h2 class="h5 mb-3">Пошук номеру</h2>
+<main class="search-results-page">
+  <section class="container py-4 py-lg-5">
+    <div class="row g-4 align-items-start">
+      <div class="col-12 col-lg-4">
+        <aside class="planner-card search-results-sidebar">
+          <p class="planner-label mb-2">Refine Search</p>
+          <h2 class="planner-title mb-2">Оновіть параметри пошуку</h2>
+          <p class="planner-text mb-4">
+            Змініть місто, дати або кількість гостей, щоб побачити інші варіанти проживання.
+          </p>
           {% include "hotels/partials/search_form.html" %}
-        </div>
+        </aside>
       </div>
-    </div>
 
-    <div class="col-12 col-lg-8">
-      <div class="card bg-black border-secondary mb-4">
-        <div class="card-body">
-          <h1 class="h4 mb-3">Результати пошуку</h1>
+      <div class="col-12 col-lg-8">
+        <div class="search-results-summary mb-4">
+          <span class="section-eyebrow">Search Results</span>
+          <h1 class="search-results-title mt-2 mb-3">Результати пошуку</h1>
+          <p class="search-results-copy mb-4">
+            Добірка сформована за поточними параметрами пошуку та показує готелі,
+            які найкраще відповідають вашому запиту.
+          </p>
 
-          <div class="d-flex flex-wrap gap-2">
-            <span class="badge text-bg-secondary">
+          <div class="search-results-chips">
+            <span class="search-results-chip">
               Місто: {{ request.GET.city|default:"Будь-яке" }}
             </span>
-            <span class="badge text-bg-secondary">
+            <span class="search-results-chip">
               Заїзд: {{ request.GET.check_in|default:"—" }}
             </span>
-            <span class="badge text-bg-secondary">
+            <span class="search-results-chip">
               Виїзд: {{ request.GET.check_out|default:"—" }}
             </span>
-            <span class="badge text-bg-secondary">
+            <span class="search-results-chip">
               Дорослі: {{ request.GET.adults|default:"1" }}
             </span>
-            <span class="badge text-bg-secondary">
+            <span class="search-results-chip">
               Діти: {{ request.GET.children|default:"0" }}
             </span>
           </div>
         </div>
-      </div>
 
-      {% if hotels %}
-        <div class="row g-4">
-          {% for hotel in hotels %}
-            <div class="col-12 col-sm-6">
-              <div class="card bg-black border-secondary h-100 hotel-card">
-                <a
-                  href="{% url 'hotel_detail' hotel.slug %}?city={{ request.GET.city|urlencode }}&check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}&children={{ request.GET.children|urlencode }}"
-                  class="stretched-link"
-                ></a>
+        {% if hotels %}
+          <div class="row g-4">
+            {% for hotel in hotels %}
+              <div class="col-12 col-sm-6">
+                <div class="card bg-black border-secondary h-100 hotel-card">
+                  <a
+                    href="{% url 'hotel_detail' hotel.slug %}?city={{ request.GET.city|urlencode }}&check_in={{ request.GET.check_in|urlencode }}&check_out={{ request.GET.check_out|urlencode }}&adults={{ request.GET.adults|urlencode }}&children={{ request.GET.children|urlencode }}"
+                    class="stretched-link"
+                  ></a>
 
-                {% if hotel.main_image %}
-                  <img
-                    src="{{ hotel.main_image.image }}"
-                    class="card-img-top hotel-card-img"
-                    alt="{{ hotel.main_image.alt_text|default:hotel.name }}"
-                  />
-                {% endif %}
+                  {% if hotel.main_image %}
+                    <img
+                      src="{{ hotel.main_image.image }}"
+                      class="card-img-top hotel-card-img"
+                      alt="{{ hotel.main_image.alt_text|default:hotel.name }}"
+                    />
+                  {% endif %}
 
-                <div class="card-body">
-                  <h3 class="h5 card-title mb-2">{{ hotel.name }}</h3>
+                  <div class="card-body">
+                    <h3 class="h5 card-title mb-2">{{ hotel.name }}</h3>
 
-                  <p class="text-secondary mb-2">{{ hotel.city }}</p>
+                    <p class="text-secondary mb-2">{{ hotel.city }}</p>
 
-                  <p class="text-warning mb-2">{{ hotel.stars }}★</p>
+                    <p class="text-warning mb-2">{{ hotel.stars }}★</p>
 
-                  <div class="d-flex justify-content-between align-items-center gap-3 hotel-meta">
-                    <span class="fw-bold">
-                      від ${{ hotel.min_price|floatformat:0 }} / ніч
-                    </span>
+                    <div class="d-flex justify-content-between align-items-center gap-3 hotel-meta">
+                      <span class="fw-bold">
+                        від ${{ hotel.min_price|floatformat:0 }} / ніч
+                      </span>
 
-                    <span class="badge bg-warning text-dark">
-                      {{ hotel.avg_rating|floatformat:1 }}
-                    </span>
+                      <span class="badge bg-warning text-dark">
+                        {{ hotel.avg_rating|floatformat:1 }}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          {% endfor %}
-        </div>
+            {% endfor %}
+          </div>
 
-      {% else %}
-        <div class="card bg-black border-secondary">
-          <div class="card-body">
-            <h2 class="h5 mb-3">Нічого не знайдено</h2>
-            <p class="text-secondary mb-0">
+        {% else %}
+          <div class="search-results-empty">
+            <h2 class="h4 mb-3">Нічого не знайдено</h2>
+            <p class="mb-0">
               За цими параметрами не знайдено готелів. Спробуйте змінити місто, дати або кількість гостей.
             </p>
           </div>
-        </div>
-      {% endif %}
+        {% endif %}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 {% if is_paginated %}
 <nav class="mt-4 pagination-wrap">
@@ -189,5 +193,7 @@
   </ul>
 </nav>
 {% endif %}
+
+</main>
 
 {% endblock %}

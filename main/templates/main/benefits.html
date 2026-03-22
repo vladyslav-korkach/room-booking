@@ -1,0 +1,185 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Переваги — HotelFlow{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/benefits.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="benefits-page">
+  <section class="benefits-hero py-5">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-12 col-xl-7">
+          <div class="benefits-hero-panel h-100">
+            <span class="section-eyebrow">Why HotelFlow</span>
+            <h1 class="benefits-title mt-3 mb-3">
+              Платформа, яка прибирає зайві кроки з пошуку, бронювання та керування поїздкою
+            </h1>
+            <p class="benefits-copy mb-4">
+              HotelFlow поєднує каталог готелів, швидкий пошук за датами,
+              зрозуміле оформлення бронювання та особистий кабінет в одному інтерфейсі.
+            </p>
+
+            <div class="row g-3">
+              <div class="col-12 col-sm-4">
+                <div class="hero-stat-card">
+                  <span class="hero-stat-value">{{ hotel_count }}</span>
+                  <span class="hero-stat-label">готелів у системі</span>
+                </div>
+              </div>
+              <div class="col-12 col-sm-4">
+                <div class="hero-stat-card">
+                  <span class="hero-stat-value">{{ city_count }}</span>
+                  <span class="hero-stat-label">міст для бронювання</span>
+                </div>
+              </div>
+              <div class="col-12 col-sm-4">
+                <div class="hero-stat-card">
+                  <span class="hero-stat-value">{{ room_type_count }}</span>
+                  <span class="hero-stat-label">типів номерів</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-xl-5">
+          <aside class="benefits-side-panel h-100">
+            <p class="planner-label mb-2">Travel Flow</p>
+            <h2 class="planner-title mb-2">Що користувач отримує на практиці</h2>
+            <p class="planner-text mb-4">
+              Не просто список готелів, а повний маршрут дій від пошуку до
+              керування власними бронюваннями без повторного введення даних.
+            </p>
+
+            <div class="benefits-steps">
+              <div class="benefits-step">
+                <span class="benefits-step-index">01</span>
+                <p class="benefits-step-text mb-0">Пошук за містом, датами та кількістю гостей</p>
+              </div>
+              <div class="benefits-step">
+                <span class="benefits-step-index">02</span>
+                <p class="benefits-step-text mb-0">Перегляд номерів із місткістю, ціною та доступністю</p>
+              </div>
+              <div class="benefits-step">
+                <span class="benefits-step-index">03</span>
+                <p class="benefits-step-text mb-0">Швидке бронювання та керування замовленнями в кабінеті</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits-grid-section pb-4 pb-lg-5">
+    <div class="container">
+      <div class="section-heading mb-4">
+        <span class="section-eyebrow">Core Benefits</span>
+        <h2 class="section-title mt-2 mb-0">Основні переваги сервісу</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-xl-4">
+          <article class="benefit-card benefit-detail-card h-100">
+            <span class="benefit-index">01</span>
+            <h3 class="benefit-title">Швидкий вибір готелю</h3>
+            <p class="benefit-text mb-0">
+              Усе потрібне для первинного відбору вже видно на картках: місто,
+              рейтинг, стартова ціна та доступні варіанти номерів.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+          <article class="benefit-card benefit-detail-card h-100">
+            <span class="benefit-index">02</span>
+            <h3 class="benefit-title">Менше повторного вводу</h3>
+            <p class="benefit-text mb-0">
+              Дати пошуку та дані авторизованого користувача можна підставляти в
+              форму бронювання, щоб скоротити кількість ручних дій.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+          <article class="benefit-card benefit-detail-card h-100">
+            <span class="benefit-index">03</span>
+            <h3 class="benefit-title">Контроль бронювань</h3>
+            <p class="benefit-text mb-0">
+              Користувач бачить свої бронювання, статус кожного замовлення та
+              може скасувати майбутнє бронювання до дати заїзду.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+          <article class="benefit-card benefit-detail-card h-100">
+            <span class="benefit-index">04</span>
+            <h3 class="benefit-title">Зрозуміла доступність</h3>
+            <p class="benefit-text mb-0">
+              Кожен тип номера має місткість і кількість доступних одиниць, що
+              допомагає швидше відсікати невідповідні варіанти.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+          <article class="benefit-card benefit-detail-card h-100">
+            <span class="benefit-index">05</span>
+            <h3 class="benefit-title">Єдина логіка навігації</h3>
+            <p class="benefit-text mb-0">
+              Від пошуку до сторінки номера і далі до форми бронювання користувач
+              рухається через послідовний маршрут без зайвих переходів.
+            </p>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+          <article class="benefit-card benefit-detail-card h-100">
+            <span class="benefit-index">06</span>
+            <h3 class="benefit-title">База для подальшого росту</h3>
+            <p class="benefit-text mb-0">
+              Поточна структура вже підтримує автентифікацію, листи для
+              відновлення пароля та розширення кабінету новими можливостями.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits-journey pb-5">
+    <div class="container">
+      <div class="journey-card">
+        <div class="row g-4 align-items-center">
+          <div class="col-12 col-lg-7">
+            <span class="section-eyebrow">User Journey</span>
+            <h2 class="section-title mt-2 mb-3">Як виглядає сценарій користувача</h2>
+            <p class="benefits-copy mb-0">
+              Людина обирає місто і дати, переходить до готелю, переглядає тип
+              номера, оформлює бронювання і повертається до кабінету, де може
+              переглядати або скасовувати майбутні замовлення.
+            </p>
+          </div>
+
+          <div class="col-12 col-lg-5">
+            <div class="benefits-action-stack">
+              <a class="btn btn-light hero-primary-btn" href="{% url 'hotels' %}">
+                Перейти до каталогу
+              </a>
+              <a class="btn btn-outline-light hero-secondary-btn" href="{% url 'home' %}">
+                Повернутися на головну
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

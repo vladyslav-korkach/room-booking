@@ -5,43 +5,56 @@
 {% block title %} HotelFlow {% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'main/css/home.css' %}">
 <link rel="stylesheet" href="{% static 'hotels/css/hotel.css' %}">
 {% endblock %}
 
 {% block content %}
+<main class="hotel-list-page">
+  <section class="home-hero py-4 py-lg-5">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-12 col-lg-7">
+          <div class="hero-panel h-100">
+            <span class="hero-kicker">
+              Бронювання номерів для всієї мережі
+            </span>
 
-<div class="container py-4 py-lg-5">
-  <div class="row align-items-center gy-4">
-    <div class="col-12 col-lg-7 hero-copy">
-      <span class="badge bg-info text-dark mb-3">
-        Бронювання номерів для всієї мережі
-      </span>
+            <h1 class="hero-title mt-3 mb-3">
+              Сучасний сайт для бронювання номерів
+            </h1>
 
-      <h1 class="display-5 fw-bold mb-3">
-        Сучасний сайт для бронювання номерів
-      </h1>
+            <p class="hero-text mb-4">
+              Стильний інтерфейс для гостей: пошук готелю, вибір номеру, дати заїзду
+              та швидке бронювання.
+            </p>
 
-      <p class="text-secondary">
-        Стильний інтерфейс для гостей: пошук готелю, вибір номеру, дати заїзду
-        та швидке бронювання.
-      </p>
+            <div class="d-flex flex-column flex-sm-row gap-3">
+              <a class="btn btn-light hero-primary-btn" href="#catalog">
+                Переглянути готелі
+              </a>
+              <a class="btn btn-outline-light hero-secondary-btn" href="#quick-search">
+                Швидкий пошук
+              </a>
+            </div>
+          </div>
+        </div>
 
-      <div class="mt-4 d-flex flex-column flex-sm-row gap-2">
-        <button class="btn btn-info">Забронювати</button>
-        <button class="btn btn-outline-light">Переглянути готелі</button>
-      </div>
-    </div>
+        <div class="col-12 col-lg-5">
+          <aside id="quick-search" class="planner-card h-100">
+            <p class="planner-label mb-2">Quick Search</p>
+            <h2 class="planner-title mb-2">Знайдіть варіант за хвилину</h2>
+            <p class="planner-text mb-4">
+              Вкажіть місто, дати та кількість гостей, щоб отримати добірку
+              готелів із доступними кімнатами для вашої поїздки.
+            </p>
 
-    <div class="col-12 col-lg-5">
-      <div class="card bg-black border-secondary search-card">
-        <div class="card-body">
-          <h5 class="card-title">Пошук номеру</h5>
-          {% include "hotels/partials/search_form.html" %}
+            {% include "hotels/partials/search_form.html" %}
+          </aside>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
 <section id="catalog" class="container py-4 py-lg-5">
   <h2 class="mb-4 section-title">Популярні готелі</h2>
@@ -199,5 +212,7 @@
   </ul>
 </nav>
 {% endif %}
+
+</main>
 
 {% endblock %}

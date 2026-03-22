@@ -34,6 +34,15 @@ def index(request):
     return render(request, "main/index.html", context)
 
 
+def benefits(request):
+    context = {
+        "hotel_count": Hotel.objects.count(),
+        "city_count": Hotel.objects.values("city").distinct().count(),
+        "room_type_count": RoomType.objects.count(),
+    }
+    return render(request, "main/benefits.html", context)
+
+
 class SignUpView(CreateView):
     form_class = SignUpForm
     template_name = "registration/signup.html"

@@ -122,7 +122,6 @@
 }
 
 .planner-card .form-control {
-    min-height: 48px;
     border: 1px solid rgba(148, 163, 184, 0.22);
     background: rgba(248, 250, 252, 0.95);
     color: #0f172a;
@@ -136,12 +135,12 @@
 .planner-card .btn-info {
     border: none;
     color: #08111d;
-    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
 }
 
 .planner-card .btn-info:hover {
     color: #08111d;
-    background: linear-gradient(135deg, #7dd3fc, #0ea5e9);
+    background: linear-gradient(135deg, #fcd34d, #f59e0b);
 }
 
 .benefit-card {
